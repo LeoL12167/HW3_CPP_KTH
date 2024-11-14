@@ -1,0 +1,40 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+2
+Microsoft (R) C/C++-Optimierungscompiler Version 19.29.30154 für x64
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+CMakeCCompilerId.c
+Microsoft (R) Incremental Linker Version 14.29.30154.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCCompilerId.exe 
+CMakeCCompilerId.obj 
+libucrt.lib(checkcfg.obj) : error LNK2001: Nicht aufgelöstes externes Symbol "_guard_check_icall_$fo$".
+CMakeCCompilerId.exe : fatal error LNK1120: 1 nicht aufgelöste Externe
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+2
+Microsoft (R) C/C++-Optimierungscompiler Version 19.29.30154 für x64
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+CMakeCXXCompilerId.cpp
+Microsoft (R) Incremental Linker Version 14.29.30154.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCXXCompilerId.exe 
+CMakeCXXCompilerId.obj 
+libucrt.lib(checkcfg.obj) : error LNK2001: Nicht aufgelöstes externes Symbol "_guard_check_icall_$fo$".
+CMakeCXXCompilerId.exe : fatal error LNK1120: 1 nicht aufgelöste Externe
+
+
