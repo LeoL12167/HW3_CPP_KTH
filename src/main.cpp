@@ -11,42 +11,16 @@
 #define CACHE_CHECK(t)                                                         \
   auto cached = cache.find(t);                                                 \
   if (cached != cache.end()) {                                                 \
-    std::cout << "cache hit\n";                                                \
     return cached->second;                                                     \
   }
-#define CACHE_PRINT()                                                          \
-  // std::cout << "cache keys\n";                                                 \
-  // std::cout << cache.size();                                                   \
-  // std::cout << "\n";
 #define CACHE_STORE(t, result) cache[t] = result;
 #else
 #define CACHE_DECL
 #define CACHE_CHECK(t)
 #define CACHE_STORE(t, result)
-#define CACHE_PRINT()
 #endif
 
-#ifdef USE_LEN_CACHE
-#define LEN_CACHE_DECL mutable std::map<double, double> arcLengthCache;
-#define LEN_CACHE_CHECK(t)                                                     \
-  auto it = arcLengthCache.lower_bound(t);                                     \
-  if (it != arcLengthCache.end() && it->first == t) {                          \
-    return it->second;                                                         \
-  }
 
-#define LEN_CACHE_PRINT()                                                      \
-  std::cout << arcLengthCache.size();                                          \
-  std::cout << "\n";
-#define LEN_CACHE_STORE(t, result) arcLengthCache[t] = result;
-#else
-#define LEN_CACHE_DECL
-#define LEN_CACHE_CHECK(t)
-#define LEN_CACHE_STORE(t, result)
-#define LEN_CACHE_PRINT()
-#endif
-
-int atHits = 0;
-int alHits = 0;
 Point operator*(double factor, const Point &p) { return p * factor; }
 
 class Curve {
@@ -72,8 +46,6 @@ public:
     if (this != &other) {
       start = other.start;
       end = other.end;
-      // other.x = 0;
-      // other.y = 0;
     }
     return *this;
   }
@@ -94,8 +66,6 @@ public:
   Point at(double t) const override {
 
     CACHE_CHECK(t);
-
-    atHits++;
 
     double s1 = arcLength(1.0);
 
@@ -138,7 +108,7 @@ private:
 
 class BottomCurve : public EquationCurve {
 public:
-  ~BottomCurve() { CACHE_PRINT(); }
+  ~BottomCurve() {  }
 
 private:
   double g(double x) const {
@@ -199,13 +169,10 @@ public:
 
     for (size_t i = 0; i < n; i++) {
       auto xi = static_cast<double>(i) * h;
-
       auto top = topBound->at(xi);
       auto bottom = bottomBound->at(xi);
-
       for (size_t j = 0; j < n; j++) {
         auto eta = static_cast<double>(j) * h;
-
         auto left = leftBound->at(eta);
         auto right = rightBound->at(eta);
         grid[i][j] = (1 - xi) * left + xi * right + (1 - eta) * bottom +
@@ -241,8 +208,6 @@ int main(int argc, char **argv) {
              std::make_unique<StraightLine>(Point{-10, 3}, Point{5, 3}),
              std::move(bottomBound));
 
-  std::cout << "Hits: " << atHits << "\n";
-  std::cout << "len Hits: " << alHits << "\n";
   std::ofstream x_file("x_coords.txt");
   std::ofstream y_file("y_coords.txt");
 
